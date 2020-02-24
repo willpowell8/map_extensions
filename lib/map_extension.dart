@@ -1,5 +1,7 @@
 library map_extension;
 
+import 'dart:core';
+
 import 'package:map_extension/PropertyCondition.dart';
 
 extension ExtensionMap on Map<String, dynamic> {
@@ -33,7 +35,7 @@ class DataMapUtils {
       if (part.contains("[")) {
         // if there is a square bracket
         List<String> subParts =
-        part.split("["); // get if there is a square bracket presentt
+            part.split("["); // get if there is a square bracket presentt
         String mainPart = subParts[0]; // this is the initial piece
         if (val is List<dynamic> && val != null) {
           List<dynamic> lVal = val;
@@ -89,7 +91,7 @@ class DataMapUtils {
             for (int i = 0; i < valList.length; i++) {
               Map<String, dynamic> valItem = valList[i];
               bool checkedValue =
-              checkObjectAgainstConditions(valItem, conditions);
+                  checkObjectAgainstConditions(valItem, conditions);
               if (checkedValue == true) {
                 val = valItem;
                 hasFoundMatch = true;
@@ -140,7 +142,7 @@ class DataMapUtils {
       if (part.contains("[")) {
         // if there is a square bracket
         List<String> subParts =
-        part.split("["); // get if there is a square bracket presentt
+            part.split("["); // get if there is a square bracket presentt
         String mainPart = subParts[0]; // this is the initial piece
         Map<String, dynamic> valMap = val;
         if (valMap != null) {
@@ -174,7 +176,7 @@ class DataMapUtils {
               for (int i = 0; i < valList.length; i++) {
                 Map<String, dynamic> valItem = valList[i];
                 bool checkedValue =
-                checkObjectAgainstConditions(valItem, conditions);
+                    checkObjectAgainstConditions(valItem, conditions);
                 if (checkedValue == true) {
                   val = valItem;
                   hasFoundMatch = true;
@@ -228,7 +230,7 @@ class DataMapUtils {
       if (part.contains("[")) {
         // if there is a square bracket
         List<String> subParts =
-        part.split("["); // get if there is a square bracket presentt
+            part.split("["); // get if there is a square bracket presentt
         String mainPart = subParts[0]; // this is the initial piece
         Map<String, dynamic> valMap = val;
         val = valMap[mainPart];
@@ -263,7 +265,7 @@ class DataMapUtils {
             for (int i = 0; i < valList.length; i++) {
               Map<String, dynamic> valItem = valList[i];
               bool checkedValue =
-              checkObjectAgainstConditions(valItem, conditions);
+                  checkObjectAgainstConditions(valItem, conditions);
               if (checkedValue == true) {
                 val = valItem;
                 hasFoundMatch = true;
