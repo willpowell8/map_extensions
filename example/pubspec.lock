@@ -84,9 +84,11 @@ packages:
   map_extension:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "92a5ebd177cc28413b24887567f90c9ee874716d"
+      url: "ssh://git@vault.keytree.cloud:7999/kat/map_extension.git"
+    source: git
     version: "0.0.1"
   matcher:
     dependency: transitive

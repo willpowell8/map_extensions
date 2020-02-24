@@ -25,11 +25,15 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   map_extension:
-    path: "../"
+    git:
+      url: ssh://git@vault.keytree.cloud:7999/kat/map_extension.git
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  map_extension:
+    path: "../"
 
 
 # For information on the generic Dart part of this file, see the
