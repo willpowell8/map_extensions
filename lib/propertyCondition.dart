@@ -9,12 +9,17 @@ class PropertyCondition {
 
   bool check(Map<String, dynamic> object) {
     dynamic actualValue = object[field];
+    dynamic targetValue = value;
+    if(targetValue is String){
+      String val = targetValue;
+      targetValue = val.replaceAll("|", ".");
+    }
     switch (condition) {
       case PropertyConditionType.equal:
-        return actualValue == value;
+        return actualValue == targetValue;
         break;
       case PropertyConditionType.notEqual:
-        return actualValue != value;
+        return actualValue != targetValue;
         break;
     }
   }
