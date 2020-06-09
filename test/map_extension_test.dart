@@ -4,6 +4,6 @@ import 'package:map_extension/map_extension.dart';
 void main() {
   test('adds one to input values', () {
     Map<String, dynamic> data = {"value": "result"};
-    assert(data.propert("value") == "result");
+    assert(data.property("value") == "result");
   });
 }
