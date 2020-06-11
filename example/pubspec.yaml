@@ -20,20 +20,21 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
-  map_extension:
-    git:
-      url: ssh://git@vault.keytree.cloud:7999/kat/map_extension.git
 
+# working on git
+#  map_extension:
+#    git:
+#      url: ssh://git@vault.keytree.cloud:7999/kat/map_extension.git
+# working locally
+  map_extension:
+    path: "../../map_extension"
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  map_extension:
-    path: "../"
 
 
 # For information on the generic Dart part of this file, see the
