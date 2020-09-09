@@ -2,7 +2,7 @@ library map_extension;
 
 import 'dart:core';
 
-import 'package:map_extension/PropertyCondition.dart';
+import 'package:map_extension/propertyCondition.dart';
 
 extension ExtensionMap on Map<String, dynamic> {
   Object property(String name) {
