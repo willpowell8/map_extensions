@@ -69,35 +69,46 @@ class DataMapUtils {
           if (val is List) {
             List<dynamic> valList = val;
             List<PropertyCondition> conditions = List<PropertyCondition>();
-            List<String> conditionsString = secondPart.split(",");
-            conditionsString.forEach((conditonString) {
-              if (conditonString.contains("!=")) {
-                List<String> conditonPieces = conditonString.split("!=");
-                PropertyCondition condition = PropertyCondition(
-                    condition: PropertyConditionType.notEqual,
-                    field: conditonPieces[0],
-                    value: conditonPieces[1]);
-                conditions.add(condition);
-              } else if (conditonString.contains("=")) {
-                List<String> conditonPieces = conditonString.split("=");
-                PropertyCondition condition = PropertyCondition(
-                    condition: PropertyConditionType.equal,
-                    field: conditonPieces[0],
-                    value: conditonPieces[1]);
-                conditions.add(condition);
+            if (secondPart.contains(",")) {
+              List<String> conditionsString = secondPart.split(",");
+              conditionsString.forEach((conditonString) {
+                if (conditonString.contains("!=")) {
+                  List<String> conditonPieces = conditonString.split("!=");
+                  PropertyCondition condition = PropertyCondition(
+                      condition: PropertyConditionType.notEqual,
+                      field: conditonPieces[0],
+                      value: conditonPieces[1]);
+                  conditions.add(condition);
+                } else if (conditonString.contains("=")) {
+                  List<String> conditonPieces = conditonString.split("=");
+                  PropertyCondition condition = PropertyCondition(
+                      condition: PropertyConditionType.equal,
+                      field: conditonPieces[0],
+                      value: conditonPieces[1]);
+                  conditions.add(condition);
+                }
+              });
+              bool hasFoundMatch = false;
+              for (int i = 0; i < valList.length; i++) {
+                Map<String, dynamic> valItem = valList[i];
+                bool checkedValue =
+                    checkObjectAgainstConditions(valItem, conditions);
+                if (checkedValue == true) {
+                  val = valItem;
+                  hasFoundMatch = true;
+                }
               }
-            });
-            bool hasFoundMatch = false;
-            for (int i = 0; i < valList.length; i++) {
-              Map<String, dynamic> valItem = valList[i];
-              bool checkedValue =
-                  checkObjectAgainstConditions(valItem, conditions);
-              if (checkedValue == true) {
-                val = valItem;
-                hasFoundMatch = true;
+              if (hasFoundMatch == false) {
+                return null;
               }
-            }
-            if (hasFoundMatch == false) {
+            } else if (int.tryParse(secondPart) != null) {
+              /// This is when the given path contains an index
+              /// i.e create.language.selection[1]
+              int index = int.parse(secondPart);
+              if (index < valList.length) {
+                return valList[index];
+              }
+
               return null;
             }
           } else {
