@@ -63,11 +63,11 @@ class DataMapUtils {
           }
         } else if (val is Map<String, dynamic> && val != null) {
           Map<String, dynamic> valMap = val;
-          val = valMap[mainPart];
+          dynamic valMain = valMap[mainPart];
 
           String secondPart = subParts[1].replaceAll("]", "");
-          if (val is List) {
-            List<dynamic> valList = val;
+          if (valMain is List) {
+            List<dynamic> valList = valMain;
             List<PropertyCondition> conditions = List<PropertyCondition>();
             if (secondPart.contains(",")) {
               List<String> conditionsString = secondPart.split(",");
@@ -94,7 +94,7 @@ class DataMapUtils {
                 bool checkedValue =
                     checkObjectAgainstConditions(valItem, conditions);
                 if (checkedValue == true) {
-                  val = valItem;
+                  valMain = valItem;
                   hasFoundMatch = true;
                 }
               }
