@@ -69,7 +69,7 @@ class DataMapUtils {
           if (val is List) {
             List<dynamic> valList = val;
             List<PropertyCondition> conditions = List<PropertyCondition>();
-            if (secondPart.contains(",")) {
+            if (secondPart.contains(",") || secondPart.contains("=")) {
               List<String> conditionsString = secondPart.split(",");
               conditionsString.forEach((conditonString) {
                 if (conditonString.contains("!=")) {
