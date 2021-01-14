@@ -80,11 +80,11 @@ class DataMapUtils {
                       value: conditonPieces[1]);
                   conditions.add(condition);
                 } else if (conditonString.contains("=")) {
-                  List<String> conditonPieces = conditonString.split("=");
+                  List<String> conditionPieces = conditonString.split("=");
                   PropertyCondition condition = PropertyCondition(
                       condition: PropertyConditionType.equal,
-                      field: conditonPieces[0],
-                      value: conditonPieces[1]);
+                      field: conditionPieces[0],
+                      value: conditionPieces[1]);
                   conditions.add(condition);
                 }
               });
