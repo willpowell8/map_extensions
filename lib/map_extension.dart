@@ -110,17 +110,6 @@ class DataMapUtils {
               int index = int.parse(secondPart);
               if (index < valList.length) {
                 val = valList[index];
-
-                /// Return the value if it's the last part
-                if (i == parts.length - 1) {
-                  return val;
-                } else {
-                  /// There are remaning parts, parse those too
-                  /// i.e `create.language.selection[1].searchTerm`
-                  String remainingParts =
-                      parts.getRange(i + 1, parts.length).join(".");
-                  return DataMapUtils.propertyOnMap(val, remainingParts);
-                }
               } else {
                 return null;
               }
