@@ -103,10 +103,20 @@ class DataMapUtils {
               }
             } else if (int.tryParse(secondPart) != null) {
               /// This is when the given path contains an index
-              /// i.e create.language.selection[1]
+              /// i.e `create.language.selection[1]`
               int index = int.parse(secondPart);
               if (index < valList.length) {
-                return valList[index];
+                /// Return the value if it's the last part
+                if (i == parts.length - 1) {
+                  return valList[index];
+                } else {
+                  /// There are remaning parts, parse those too
+                  /// i.e `create.language.selection[1].searchTerm`
+                  String remainingParts =
+                      parts.getRange(i + 1, parts.length).join(".");
+                  return DataMapUtils.propertyOnMap(
+                      valList[index], remainingParts);
+                }
               }
 
               return null;
