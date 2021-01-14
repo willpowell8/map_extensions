@@ -80,20 +80,22 @@ class DataMapUtils {
                       value: conditonPieces[1]);
                   conditions.add(condition);
                 } else if (conditonString.contains("=")) {
-                  List<String> conditonPieces = conditonString.split("=");
+                  List<String> conditionPieces = conditonString.split("=");
                   PropertyCondition condition = PropertyCondition(
                       condition: PropertyConditionType.equal,
-                      field: conditonPieces[0],
-                      value: conditonPieces[1]);
+                      field: conditionPieces[0],
+                      value: conditionPieces[1]);
                   conditions.add(condition);
                 }
               });
               bool hasFoundMatch = false;
+              List<dynamic> newVals = List<dynamic>();
               for (int i = 0; i < valList.length; i++) {
                 Map<String, dynamic> valItem = valList[i];
                 bool checkedValue =
                     checkObjectAgainstConditions(valItem, conditions);
                 if (checkedValue == true) {
+                  newVals.add(valItem);
                   valMain = valItem;
                   hasFoundMatch = true;
                 }
@@ -101,25 +103,27 @@ class DataMapUtils {
               if (hasFoundMatch == false) {
                 return null;
               }
+              val = newVals;
             } else if (int.tryParse(secondPart) != null) {
               /// This is when the given path contains an index
               /// i.e `create.language.selection[1]`
               int index = int.parse(secondPart);
               if (index < valList.length) {
+                val = valList[index];
+
                 /// Return the value if it's the last part
                 if (i == parts.length - 1) {
-                  return valList[index];
+                  return val;
                 } else {
                   /// There are remaning parts, parse those too
                   /// i.e `create.language.selection[1].searchTerm`
                   String remainingParts =
                       parts.getRange(i + 1, parts.length).join(".");
-                  return DataMapUtils.propertyOnMap(
-                      valList[index], remainingParts);
+                  return DataMapUtils.propertyOnMap(val, remainingParts);
                 }
+              } else {
+                return null;
               }
-
-              return null;
             }
           } else {
             return null;
@@ -128,11 +132,23 @@ class DataMapUtils {
           return null;
         }
       } else {
-        Map<String, dynamic> valObject = val;
-        if (valObject != null && valObject[part] != null) {
-          val = valObject[part];
-        } else {
-          return null;
+        if (val is Map) {
+          Map<String, dynamic> valObject = val;
+          if (valObject != null && valObject[part] != null) {
+            val = valObject[part];
+          } else {
+            return null;
+          }
+        } else if (val is List) {
+          List<dynamic> valList = val;
+          List<dynamic> output = valList.map((e) {
+            return DataMapUtils.propertyOnMap(e, part);
+          }).toList();
+          if (output.length == 1) {
+            val = output.first;
+          } else {
+            val = output;
+          }
         }
       }
     }
