@@ -4,6 +4,10 @@ import 'dart:core';
 
 import 'package:map_extension/propertyCondition.dart';
 
+/// <p>See the full unit test suite to explore all the key uses and behaviours
+/// <p>supported by this class
+/// <p>See test/map_extension.dart
+/// <p>There are loads of sneaky things you can use this for when reading the config object
 extension ExtensionMap on Map<String, dynamic> {
   Object property(String name) {
     return DataMapUtils.propertyOnMap(this, name);
