@@ -10,7 +10,7 @@ class PropertyCondition {
   bool check(Map<String, dynamic> object) {
     dynamic actualValue = object[field];
     dynamic targetValue = value;
-    if(targetValue is String){
+    if (targetValue is String) {
       String val = targetValue;
       targetValue = val.replaceAll("|", ".");
     }
@@ -22,5 +22,7 @@ class PropertyCondition {
         return actualValue != targetValue;
         break;
     }
+    print("MISSING HANDLER");
+    return false;
   }
 }

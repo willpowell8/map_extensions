@@ -39,11 +39,11 @@ class DataMapUtils {
         String mainPart = subParts[0]; // this is the initial piece
         if (val is List<dynamic> && val != null) {
           List<dynamic> lVal = val;
-          List<dynamic> output = List<dynamic>();
+          List<dynamic> output = [];
           lVal.forEach((lItem) {
             if (lItem is Map<String, dynamic>) {
               Map<String, dynamic> mItem = lItem;
-              List<String> targetParts = List<String>();
+              List<String> targetParts = [];
               for (int j = i; j < parts.length; j++) {
                 targetParts.add(parts[j]);
               }
@@ -68,7 +68,7 @@ class DataMapUtils {
           String secondPart = subParts[1].replaceAll("]", "");
           if (valMain is List) {
             List<dynamic> valList = valMain;
-            List<PropertyCondition> conditions = List<PropertyCondition>();
+            List<PropertyCondition> conditions = [];
             if (secondPart.contains(",") || secondPart.contains("=")) {
               List<String> conditionsString = secondPart.split(",");
               conditionsString.forEach((conditonString) {
@@ -89,7 +89,7 @@ class DataMapUtils {
                 }
               });
               bool hasFoundMatch = false;
-              List<dynamic> newVals = List<dynamic>();
+              List<dynamic> newVals = [];
               for (int i = 0; i < valList.length; i++) {
                 Map<String, dynamic> valItem = valList[i];
                 bool checkedValue =
@@ -176,7 +176,7 @@ class DataMapUtils {
           String secondPart = subParts[1].replaceAll("]", "");
           if (val is List) {
             List<dynamic> valList = val;
-            List<PropertyCondition> conditions = List<PropertyCondition>();
+            List<PropertyCondition> conditions = [];
             List<String> conditionsString = secondPart.split(",");
             conditionsString.forEach((conditonString) {
               if (conditonString.contains("!=")) {
@@ -263,7 +263,7 @@ class DataMapUtils {
         String secondPart = subParts[1].replaceAll("]", "");
         if (val is List) {
           List<dynamic> valList = val;
-          List<PropertyCondition> conditions = List<PropertyCondition>();
+          List<PropertyCondition> conditions = [];
           List<String> conditionsString = secondPart.split(",");
           conditionsString.forEach((conditonString) {
             if (conditonString.contains("!=")) {

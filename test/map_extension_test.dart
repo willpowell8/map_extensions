@@ -91,5 +91,16 @@ void main() {
       List propertyList = propertyVal;
       assert(propertyList.length == 2);
     });
+    test('Read Property List[MultiMatchCondition].property', () {
+      Map<String, dynamic> data = {
+        "values": [
+          {"condition": "1", "row": "v1"},
+          {"condition": "1", "row": "v2"},
+          {"condition": "3", "row": "v3"}
+        ]
+      };
+      dynamic propertyVal = data.property("values[condition=4]");
+      assert(propertyVal == null);
+    });
   });
 }
