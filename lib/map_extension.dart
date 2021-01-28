@@ -4,6 +4,10 @@ import 'dart:core';
 
 import 'package:map_extension/propertyCondition.dart';
 
+/// <p>See the full unit test suite to explore all the key uses and behaviours
+/// <p>supported by this class
+/// <p>See test/map_extension.dart
+/// <p>There are loads of sneaky things you can use this for when reading the config object
 extension ExtensionMap on Map<String, dynamic> {
   Object property(String name) {
     return DataMapUtils.propertyOnMap(this, name);
@@ -35,7 +39,7 @@ class DataMapUtils {
       if (part.contains("[")) {
         // if there is a square bracket
         List<String> subParts =
-            part.split("["); // get if there is a square bracket presentt
+            part.split("["); // get if there is a square bracket present
         String mainPart = subParts[0]; // this is the initial piece
         if (val is List<dynamic> && val != null) {
           List<dynamic> lVal = val;
@@ -106,7 +110,7 @@ class DataMapUtils {
               val = newVals;
             } else if (int.tryParse(secondPart) != null) {
               /// This is when the given path contains an index
-              /// i.e create.language.selection[1]
+              /// i.e `create.language.selection[1]`
               int index = int.parse(secondPart);
               if (index < valList.length) {
                 val = valList[index];
@@ -138,6 +142,8 @@ class DataMapUtils {
           } else {
             val = output;
           }
+        } else {
+          val = null;
         }
       }
     }

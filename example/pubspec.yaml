@@ -15,7 +15,7 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.11.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -25,11 +25,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
 
-# working on git
-#  map_extension:
-#    git:
-#      url: ssh://git@vault.keytree.cloud:7999/kat/map_extension.git
-# working locally
+  # working on git
+  #  map_extension:
+  #    git:
+  #      url: ssh://git@vault.keytree.cloud:7999/kat/map_extension.git
+  # working locally
   map_extension:
     path: "../../map_extension"
 
@@ -37,13 +37,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
