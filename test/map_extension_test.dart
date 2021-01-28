@@ -16,6 +16,18 @@ void main() {
       assert(value == "TEST");
     });
 
+    // test('Read Property from Array', () {
+    //   Map<String, dynamic> data = {
+    //     "MODULES": [
+    //       {"module": "v1_module", "loader": "v1_loader"},
+    //       {"module": "v2_module", "loader": "v2_loader"},
+    //       {"module": "v3_module", "loader": "v3_loader"},
+    //     ]
+    //   };
+    //   dynamic item = data.property("MODULES[module=v1_module)]");
+    //   assert(item != null);
+    // });
+
     test('Read Property List', () {
       Map<String, dynamic> data = {
         "values": ["v1", "v2", "v3"]
