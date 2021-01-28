@@ -39,7 +39,7 @@ class DataMapUtils {
       if (part.contains("[")) {
         // if there is a square bracket
         List<String> subParts =
-            part.split("["); // get if there is a square bracket presentt
+            part.split("["); // get if there is a square bracket present
         String mainPart = subParts[0]; // this is the initial piece
         if (val is List<dynamic> && val != null) {
           List<dynamic> lVal = val;
@@ -142,6 +142,8 @@ class DataMapUtils {
           } else {
             val = output;
           }
+        } else {
+          val = null;
         }
       }
     }
