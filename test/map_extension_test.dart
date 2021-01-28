@@ -114,5 +114,37 @@ void main() {
       dynamic propertyVal = data.property("values[condition=4]");
       assert(propertyVal == null);
     });
+
+    test('Null Read Property', () {
+      Map<String, dynamic> data = {"values": "Item"};
+      dynamic propertyVal = data.property("item");
+      assert(propertyVal == null);
+    });
+
+    test('Null Read Sub Item', () {
+      Map<String, dynamic> data = {"values": "Item"};
+      dynamic propertyVal = data.property("item.value");
+      assert(propertyVal == null);
+    });
+
+    test('Null Read Sub Item 2', () {
+      Map<String, dynamic> data = {
+        "values": "Item",
+        "item": {"v": "Val1"}
+      };
+      dynamic propertyVal = data.property("item.value");
+      assert(propertyVal == null);
+    });
+
+    test('Null Read Sub Item 3', () {
+      Map<String, dynamic> data = {
+        "values": "Item",
+        "item": [
+          {"v": "Val1"}
+        ]
+      };
+      dynamic propertyVal = data.property("item.value");
+      assert(propertyVal == null);
+    });
   });
 }
