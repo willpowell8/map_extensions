@@ -146,5 +146,25 @@ void main() {
       dynamic propertyVal = data.property("item.value");
       assert(propertyVal == null);
     });
+
+    test('Write Replacement array', () {
+      Map<String, dynamic> data = {
+        "values": "Item",
+        "item": [
+          {"v": "Val1"}
+        ]
+      };
+      data.setProperty("item", [
+        {"v": "Val2"}
+      ]);
+
+      var itemArray = data.property("item");
+      assert(itemArray is List);
+      List<dynamic> ary = itemArray;
+      assert(ary.length == 1);
+
+      var itemProperty = data.property("item.v");
+      assert(itemProperty == "Val2");
+    });
   });
 }

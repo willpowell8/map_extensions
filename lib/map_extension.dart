@@ -203,7 +203,11 @@ class DataMapUtils {
             });
             bool hasFoundMatch = false;
             if (isLastPart == true) {
-              valList.add(object);
+              if (object is List) {
+                valList = object;
+              } else {
+                valList.add(object);
+              }
             } else {
               for (int i = 0; i < valList.length; i++) {
                 Map<String, dynamic> valItem = valList[i];
@@ -229,7 +233,7 @@ class DataMapUtils {
           Map<String, dynamic> valMap = val;
           if (valMap[part] != null) {
             if (isLastPart == true) {
-              if (valMap[part] is List) {
+              if (valMap[part] is List && !(object is List)) {
                 List<dynamic> partList = valMap[part];
                 partList.add(object);
               } else {
