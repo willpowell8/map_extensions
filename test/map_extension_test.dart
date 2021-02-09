@@ -166,5 +166,32 @@ void main() {
       var itemProperty = data.property("item.v");
       assert(itemProperty == "Val2");
     });
+    test('Write Sub array', () {
+      Map<String, dynamic> data = {
+        "values": "Item",
+        "item": [
+          {
+            "v": "Val1",
+          },
+          {
+            "v": "Val2",
+            "children": [
+              {
+                "item": "V1",
+              },
+              {
+                "item": "V2",
+                "properties": {"p1": "Hello"}
+              }
+            ],
+          }
+        ]
+      };
+      var initialItemValue = data.property("item[1].children[1].properties.p1");
+      assert(initialItemValue == "Hello");
+      data.setProperty("item[1].children[1].properties.p1", "V3");
+      var finalItemValue = data.property("item[1].children[1].properties.p1");
+      assert(finalItemValue == "V3");
+    });
   });
 }
