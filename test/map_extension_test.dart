@@ -16,17 +16,55 @@ void main() {
       assert(value == "TEST");
     });
 
-    // test('Read Property from Array', () {
-    //   Map<String, dynamic> data = {
-    //     "MODULES": [
-    //       {"module": "v1_module", "loader": "v1_loader"},
-    //       {"module": "v2_module", "loader": "v2_loader"},
-    //       {"module": "v3_module", "loader": "v3_loader"},
-    //     ]
-    //   };
-    //   dynamic item = data.property("MODULES[module=v1_module)]");
-    //   assert(item != null);
-    // });
+    test('Read Property from Array', () {
+      Map<String, dynamic> data = {
+        "MODULES": [
+          {"module": "v1_module", "loader": "v1_loader"},
+          {"module": "v2_module", "loader": "v2_loader"},
+          {"module": "v3_module", "loader": "v3_loader"},
+        ]
+      };
+      dynamic item = data.property("MODULES[module=v1_module]");
+      assert(item != null);
+    });
+
+    test('Delete Property from Array', () {
+      Map<String, dynamic> data = {
+        "MODULES": [
+          {"module": "v1_module", "loader": "v1_loader"},
+          {"module": "v2_module", "loader": "v2_loader"},
+          {"module": "v3_module", "loader": "v3_loader"},
+        ]
+      };
+      data.removeProperty("MODULES[module=v1_module]");
+      List<dynamic> item = data.property("MODULES");
+      assert(item.length == 2);
+    });
+    test('Delete Multiple matching property from Array', () {
+      Map<String, dynamic> data = {
+        "MODULES": [
+          {"module": "v1_module", "loader": "v1_loader"},
+          {"module": "v1_module", "loader": "v2_loader"},
+          {"module": "v3_module", "loader": "v3_loader"},
+        ]
+      };
+      data.removeProperty("MODULES[module=v1_module]");
+      List<dynamic> item = data.property("MODULES");
+      assert(item.length == 1);
+    });
+
+    test('Delete index property from Array', () {
+      Map<String, dynamic> data = {
+        "MODULES": [
+          {"module": "v1_module", "loader": "v1_loader"},
+          {"module": "v2_module", "loader": "v2_loader"},
+          {"module": "v3_module", "loader": "v3_loader"},
+        ]
+      };
+      data.removeProperty("MODULES[1]");
+      List<dynamic> item = data.property("MODULES");
+      assert(item.length == 2);
+    });
 
     test('Read Property List', () {
       Map<String, dynamic> data = {
@@ -58,6 +96,24 @@ void main() {
       assert(propertyVal is String);
       String propertyString = propertyVal;
       assert(propertyString == "v2");
+    });
+
+    test('Delete Property List[Index].property', () {
+      Map<String, dynamic> data = {
+        "values": [
+          {"row": "v1", "val": "v11"},
+          {"row": "v2", "val": "v22"},
+          {"row": "v3", "val": "v33"}
+        ]
+      };
+      dynamic propertyVal = data.property("values[1].row");
+      assert(propertyVal is String);
+      String propertyString = propertyVal;
+      assert(propertyString == "v2");
+      data.removeProperty("values[1].row");
+      var obj = data.property("values[1]");
+      dynamic pv2 = data.property("values[1].row");
+      assert(pv2 == null);
     });
 
     test('Read Property property.List[Index].property', () {
@@ -166,6 +222,7 @@ void main() {
       var itemProperty = data.property("item.v");
       assert(itemProperty == "Val2");
     });
+
     test('Write Sub array', () {
       Map<String, dynamic> data = {
         "values": "Item",

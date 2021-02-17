@@ -273,42 +273,62 @@ class DataMapUtils {
         String secondPart = subParts[1].replaceAll("]", "");
         if (val is List) {
           List<dynamic> valList = val;
-          List<PropertyCondition> conditions = [];
-          List<String> conditionsString = secondPart.split(",");
-          conditionsString.forEach((conditonString) {
-            if (conditonString.contains("!=")) {
-              List<String> conditonPieces = conditonString.split("!=");
-              PropertyCondition condition = PropertyCondition(
-                  condition: PropertyConditionType.notEqual,
-                  field: conditonPieces[0],
-                  value: conditonPieces[1]);
-              conditions.add(condition);
-            } else if (conditonString.contains("=")) {
-              List<String> conditonPieces = conditonString.split("=");
-              PropertyCondition condition = PropertyCondition(
-                  condition: PropertyConditionType.equal,
-                  field: conditonPieces[0],
-                  value: conditonPieces[1]);
-              conditions.add(condition);
-            }
-          });
-          bool hasFoundMatch = false;
-          if (isLastPart == true) {
-            valList.removeWhere((valItem) {
-              return checkObjectAgainstConditions(valItem, conditions);
-            });
-          } else {
-            for (int i = 0; i < valList.length; i++) {
-              Map<String, dynamic> valItem = valList[i];
-              bool checkedValue =
-                  checkObjectAgainstConditions(valItem, conditions);
-              if (checkedValue == true) {
-                val = valItem;
-                hasFoundMatch = true;
+          int secondPartInt;
+          try {
+            secondPartInt = int.parse(secondPart);
+          } catch (e) {}
+          if (secondPartInt != null) {
+            if (isLastPart) {
+              if (valList.length > secondPartInt) {
+                valList.removeAt(secondPartInt);
+              } else {
+                return false;
+              }
+            } else {
+              if (valList.length > secondPartInt) {
+                val = valList[secondPartInt];
+              } else {
+                return false;
               }
             }
-            if (hasFoundMatch == false) {
-              return false;
+          } else {
+            List<PropertyCondition> conditions = [];
+            List<String> conditionsString = secondPart.split(",");
+            conditionsString.forEach((conditionString) {
+              if (conditionString.contains("!=")) {
+                List<String> conditionPieces = conditionString.split("!=");
+                PropertyCondition condition = PropertyCondition(
+                    condition: PropertyConditionType.notEqual,
+                    field: conditionPieces[0],
+                    value: conditionPieces[1]);
+                conditions.add(condition);
+              } else if (conditionString.contains("=")) {
+                List<String> conditionPieces = conditionString.split("=");
+                PropertyCondition condition = PropertyCondition(
+                    condition: PropertyConditionType.equal,
+                    field: conditionPieces[0],
+                    value: conditionPieces[1]);
+                conditions.add(condition);
+              }
+            });
+            bool hasFoundMatch = false;
+            if (isLastPart == true) {
+              valList.removeWhere((valItem) {
+                return checkObjectAgainstConditions(valItem, conditions);
+              });
+            } else {
+              for (int i = 0; i < valList.length; i++) {
+                Map<String, dynamic> valItem = valList[i];
+                bool checkedValue =
+                    checkObjectAgainstConditions(valItem, conditions);
+                if (checkedValue == true) {
+                  val = valItem;
+                  hasFoundMatch = true;
+                }
+              }
+              if (hasFoundMatch == false) {
+                return false;
+              }
             }
           }
         } else {
