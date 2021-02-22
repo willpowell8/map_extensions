@@ -111,7 +111,6 @@ void main() {
       String propertyString = propertyVal;
       assert(propertyString == "v2");
       data.removeProperty("values[1].row");
-      var obj = data.property("values[1]");
       dynamic pv2 = data.property("values[1].row");
       assert(pv2 == null);
     });
