@@ -34,7 +34,7 @@ class DataMapUtils {
     }
     List<String> parts = name.split(".");
     Object val = map;
-    for (int i = 0; i < parts.length; i++) {
+    for (var i = 0; i < parts.length; i++) {
       String part = parts[i];
       if (part.contains("[")) {
         // if there is a square bracket
@@ -94,7 +94,7 @@ class DataMapUtils {
               });
               bool hasFoundMatch = false;
               List<dynamic> newVals = [];
-              for (int i = 0; i < valList.length; i++) {
+              for (var i = 0; i < valList.length; i++) {
                 Map<String, dynamic> valItem = valList[i];
                 bool checkedValue =
                     checkObjectAgainstConditions(valItem, conditions);
@@ -154,7 +154,7 @@ class DataMapUtils {
   // check if a test object works with conditions
   static bool checkObjectAgainstConditions(
       Map<String, dynamic> testObject, List<PropertyCondition> conditions) {
-    for (int i = 0; i < conditions.length; i++) {
+    for (var i = 0; i < conditions.length; i++) {
       PropertyCondition condition = conditions[i];
       bool conditionOutput = condition.check(testObject);
       if (conditionOutput == false) {
@@ -209,7 +209,7 @@ class DataMapUtils {
                 valList.add(object);
               }
             } else {
-              for (int i = 0; i < valList.length; i++) {
+              for (var i = 0; i < valList.length; i++) {
                 Map<String, dynamic> valItem = valList[i];
                 bool checkedValue =
                     checkObjectAgainstConditions(valItem, conditions);
@@ -317,7 +317,7 @@ class DataMapUtils {
                 return checkObjectAgainstConditions(valItem, conditions);
               });
             } else {
-              for (int i = 0; i < valList.length; i++) {
+              for (var i = 0; i < valList.length; i++) {
                 Map<String, dynamic> valItem = valList[i];
                 bool checkedValue =
                     checkObjectAgainstConditions(valItem, conditions);
