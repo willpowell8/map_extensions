@@ -34,6 +34,7 @@ dependencies:
     path: "../../map_extension"
 
 dev_dependencies:
+  pedantic: "^1.11.0"
   flutter_test:
     sdk: flutter
 
