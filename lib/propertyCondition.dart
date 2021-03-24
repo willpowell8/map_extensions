@@ -12,7 +12,7 @@ class PropertyCondition {
     dynamic targetValue = value;
     if (targetValue is String) {
       String val = targetValue;
-      targetValue = val.replaceAll("|", ".");
+      targetValue = val.replaceAll('|', '.');
     }
     switch (condition) {
       case PropertyConditionType.equal:
@@ -22,7 +22,7 @@ class PropertyCondition {
         return actualValue != targetValue;
         break;
     }
-    print("MISSING HANDLER");
+    print('PropertyCondition.check() ERROR::: MISSING HANDLER');
     return false;
   }
 }
